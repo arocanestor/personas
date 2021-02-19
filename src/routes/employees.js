@@ -40,17 +40,19 @@ router.delete('/:id', (req, res) => {
 });
 
 // INSERT An users
-router.post('/api/ur1/users', (req, res) => {
-  const sql = 'INSERT INTO users SET ?';
+router.post('/api', (req, res) => {
   const {name, email, tel} = req.body;
+  const busq = 'SELECT * from users WHERE email =' + email
+  const sql = 'INSERT INTO users SET ?';
+  
   const query ={
     nombre:name,
     email: email,
     tel:tel
-  };
-  mysqlConnection.query('SELECT * FROM users WHERE email = ?', [email], (err, rows, fields) => {
-    if (rows) {
-      res.json({status: 'Usuario existente'});
+  };  
+  mysqlConnection.query('SELECT * FROM users WHERE email = ?',[email], (err, rows, fields) => {
+    if (rows != 0) {
+      res.json({status: 'Usuario existente',rows});      
     } else {
       mysqlConnection.query(sql,query, (err, rows, fields) => {
         if(!err) {
