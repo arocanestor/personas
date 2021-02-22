@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+const rss =  require('../controllers/rss');
+const { getMaxListeners } = require('../database.js');
 const mysqlConnection  = require('../database.js');
 
 // 
@@ -66,6 +67,30 @@ router.post('/api', (req, res) => {
   
 
 });
+
+router.post('/email', (req , res) =>{
+  // res.json(rss('elkinaroca4@gmail.com'))
+  mysqlConnection.query('SELECT email FROM users ', async (err, rows, fields) =>{
+    const r = JSON.stringify(rows)   
+    const j =  JSON.parse(r);   
+
+    if(!err){
+       console.log(rss('ll'))
+      /*
+      var con = 0
+      while(con < j.length){
+        //console.log(j[con].email)  
+        console.log( await rss(j[con].email));
+        con = con+1
+      }
+      */
+    } else {
+      console.log(err)
+      res.json(err)
+    }
+  })
+})
+
 
 router.put('/:id', (req, res) => {
   const { name, salary } = req.body;
