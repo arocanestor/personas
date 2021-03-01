@@ -1,18 +1,14 @@
-let Parser = require('rss-parser');
-let parser = new Parser();
-
 const nodemailer = require("nodemailer");
+const evangelio =  require('./evan')
 
 const envio =  async(email) =>{     
-  return await evan ;
-  /*
-  const item = rss()  
+  const ev = await evangelio();      
   let info =  trans.sendMail({
     from: 'importante', // sender address
     to: email, // list of receivers
     subject: "Hello ✔", // Subject line
-    text: `${item.title}`, // plain text body
-    html: `<p>${item}</p>`, // html body
+    text: `${ev.title}`, // plain text body
+    html: `<p>${ev}</p>`, // html body
   });
    await trans.sendMail(info, (err,info) =>{
     if(err){
@@ -24,30 +20,18 @@ const envio =  async(email) =>{
       return ('email enviado')
     }
   })
-  */
+  
 }
 
 
-const evan = async() => {
-  const feed = await parser.parseURL('https://evangelizo.org/rss/v2/evangelizo_rss-sp.xml');     
-  var fecha = new Date();  
-  fecha = fecha.toISOString().split('T');
-  f = `${fecha[0]} - EVANGELIUM`;
-  feed.items.forEach(item => {      
-    if(item.guid == f){        
-         return item
-    }
-  });
-
-};
 
 var trans =  nodemailer.createTransport({
   host: "smtp.ethereal.email",
   port: 587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'kurtis.ward@ethereal.email', // generated ethereal user
-    pass: '8MFXKW95YTVny5A4SB', // generated ethereal password
+    user: 'lurline.hudson75@ethereal.email', // generated ethereal user
+    pass: 'MqVWny5yyKjKKBw1g6', // generated ethereal password
   },
 });
 

@@ -1,9 +1,11 @@
 const express = require('express');
 var cors = require('cors')
+
 require('./controllers/rss')
 const app = express();
 
 
+ 
 // Settings
 app.set('port', process.env.PORT || 4000);
 
